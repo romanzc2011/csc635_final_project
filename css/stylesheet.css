@@ -1,0 +1,53 @@
+html {
+    background-color: rgb(78, 30, 175);
+    font-family: monospace;
+    color: #f0ad4e;
+    font-weight: bolder;
+}
+
+th {
+    text-align: left;
+}
+
+.resp-text {
+    border-radius: 0.5em;
+    width: 400px;
+    float: right;
+}
+
+.button {
+    font-size: 2px !important;
+    letter-spacing: 1px;
+    line-height: 15px;
+    height: 30px !important;
+    border-radius: 30px;
+    font-family: monospace;
+}
+
+.btn-height {
+    height: 20px;
+}
+
+.logo-img {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+}
+
+.lsus-orange {
+    background-color: #f0ad4e;
+}
+
+
+
+.btn-primary-spacing {
+    margin-right: 2px;
+    margin-bottom: 2px !important;
+}
+
+#img-div {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+}
+
