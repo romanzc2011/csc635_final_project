@@ -5,6 +5,7 @@ let last_name = "";
 let student_id = "";
 let email_address = "";
 let mac_address = "";
+let rpi_type = "";
 let form_data = new FormData();
 
 // Object for student_id, email, and mac boolean values
@@ -37,6 +38,7 @@ function Validate()
     student_id = $('student_id').value.trim().toUpperCase();
     email_address = $('email_address').value.trim() // MAC addresses are case sensitive, no default toUpperCase;
     mac_address = $('rpi_mac_address').value.trim() // No default toUpperCase;
+    rpi_type = $('rpi_type').value;
 
     // Some short hand if/else present to save space
     // For validate to be successful no false should be present in form_boolean
@@ -105,6 +107,7 @@ function Submit_Form()
         form_data.append('student_id', student_id);
         form_data.append('email_address', email_address);
         form_data.append('mac_address', mac_address);
+        form_data.append('rpi_type', rpi_type);
         Get_Academic_Val();
         Get_Courses_Used();
 
