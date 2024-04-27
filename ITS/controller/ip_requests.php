@@ -1,7 +1,7 @@
 <?php require_once('../controller/raspberrypi_mysql_connection.php'); ?>
 
 <?php
-
+/* This script responsible for inserting ip requests into the IP_REQUESTS table*/
 global $MYSQL_CONN;
 $student_id = "";
 $request_sent = 0;
