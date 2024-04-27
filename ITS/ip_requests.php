@@ -26,8 +26,7 @@ $query_results = $stmt->fetchAll();
 $sql = "INSERT INTO IP_REQUESTS (STUDENT_ID, CSC_242, CSC_315, CSC_382, CSC_435_635, OTHER)
         VALUES (?,?,?,?,?,?)";
 
-// Begin the SQL transaction
-$MYSQL_CONN->beingTransaction();
+// Begin preparing the sql statement for insertion
 $stmt = $MYSQL_CONN->prepare($sql);
 
 // Loop through results, grab student id, check if request has been sent
@@ -44,7 +43,7 @@ foreach($query_results as $row)
         // Must loop thru $courses_rpi_used in case multiple classes
         foreach($courses_rpi_used as $course)
         {
-            preg_replace('/[^A-Z0-9]','',$course);
+            $course = preg_replace('/[^A-Z0-9]+/','',$course);
 
             // Go thru each $course to determine which course requires, rpi
             switch($course)
@@ -57,7 +56,7 @@ foreach($query_results as $row)
                     break;
                 case 'CSC382':
                     $csc382 = 1;
-                    break
+                    break;
                 case 'CSC435635':
                     $csc435_635 = 1;
                     break;
@@ -75,13 +74,31 @@ foreach($query_results as $row)
         $stmt->bindParam(5, $csc435_635, PDO::PARAM_INT);
         $stmt->bindParam(6, $csc_other, PDO::PARAM_INT);
 
-        // Execute and commit
-        if($stmt->execute())
-        {
-            $MYSQL_CONN->commit();
-            echo "Data insertion successful\n";
-        } else {
-            echo "Error inserting data\n";
+        try {
+        
+            // Execute and commit
+            if($stmt->execute())
+            {
+                echo "Data insertion successful\n";
+
+                // Send success response back to STUDENT with REQUEST_SENT = 1 (TRUE)
+                $request_sent = 1;
+
+                $sql = "UPDATE STUDENT SET REQUEST_SENT = ? WHERE STUDENT_ID = ?";
+                $stmt = $MYSQL_CONN->prepare($sql);
+                $stmt->bindParam(1, $request_sent, PDO::PARAM_INT);
+                $stmt->bindParam(2, $student_id, PDO::PARAM_STR);
+                
+                // Attempt execution, alert if failure
+                try {
+                    $stmt->execute();
+                    echo "REQUEST UPDATED SUCCESSFULLY...\n";
+                } catch(PDOException $e) {
+                    echo "Error updating record: ".$e->getMessage();
+                }
+            } 
+        } catch(PDOException $e) {
+            echo "Error: ". $e->getMessage();
         }
     }    
 }
