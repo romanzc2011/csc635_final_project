@@ -12,7 +12,7 @@
     <body>
        <h2>ITS INTERFACE</h2>
        <form id="ip_request_form" action="#" method="post">
-            <table border="1">
+            <table>
 
                 <!-- IP ADDRESS --------------------------------------------->
                 <th>IP ADDRESS:</th>
@@ -49,7 +49,7 @@
 
         <!-- IP REQUESTS  ----------------------------------------------------------->
         <h3>IP REQUESTS</h3>
-        <table border="1" id="ip_req_table">
+        <table id="ip_req_table">
             <!-- STUDENT ID -->
             <th>STUDENT ID:</th>
             <th>CSC 242</th>

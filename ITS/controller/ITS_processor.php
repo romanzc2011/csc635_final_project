@@ -15,18 +15,23 @@ $entry_id = "";
 $student_id = "";
 $student_exists = "";
 $all_query_results; // Need global access to check courses flagged, prevent redundant SELECT
-$can_delete = FALSE;
 
 // Function for getting ip requests manually
 function getIPRequests()
 {
     global $MYSQL_CONN;
+
     $sql = "SELECT * FROM IP_REQUESTS";
     // Prepare sql and exec
     $stmt = $MYSQL_CONN->prepare($sql);
     $stmt->execute();
 
     $all_query_results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    if(empty($all_query_results))
+    {
+        echo 0;
+    }
     
     // Display the results in the IP REQUEST table
     foreach($all_query_results as $row)
@@ -41,7 +46,6 @@ function getIPRequests()
         print('</tr>');
     }
 }
-
 // Function to determine if the request in IP_REQUESTS can be deleted
 function canDelete($student_id)
 {
@@ -64,15 +68,15 @@ function canDelete($student_id)
     
         if($stmt->rowCount() > 0)
         {
-            echo "Deleting record. Row affected: ".$stmt->rowCount();
+            echo "Deleting record. Row affected: ".$stmt->rowCount()."\n";
             $MYSQL_CONN->commit();
         } else {
-            echo "No records deleted";
+            echo "No records deleted\n";
             $MYSQL_CONN->rollBack();
         }
     } catch(PDOException $e) {
         $MYSQL_CONN->rollBack();
-        echo "Error: ".$e->getMessage();
+        echo "Error: ".$e->getMessage(),"\n";
     }
 }
 
@@ -118,7 +122,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     if(empty($query_result['STUDENT_ID']))
     {
         // Check first if STUDENT_ID is actually in the STUDENT table
-        echo "empty";
         $sql = "SELECT STUDENT_ID FROM STUDENT WHERE STUDENT_ID = ?";
         $stmt = $MYSQL_CONN->prepare($sql);
         $stmt->execute([$student_id]);
@@ -151,19 +154,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
                 $stmt = $MYSQL_CONN->prepare($sql);
                 $stmt->execute([$student_id]);
 
-                echo "IP address successfully assigned to: ".$student_id;
+                echo "IP address successfully assigned to: ".$student_id."\n";
 
                 // Delete request if no more from that student_id
                 canDelete($student_id);
 
             } else {
-                echo "IP address has already been assigned to: ".$student_id;
+                echo "IP address has already been assigned to: ".$student_id."\n";
             }
         } else {
-            echo "No student exists with ID: ".$student_id;
+            echo "No student exists with ID: ".$student_id."\n";
         }
     } else {
-        echo "IP address is already assigned to student: ".$query_result['STUDENT_ID'];
+        echo "IP address is already assigned to student: ".$query_result['STUDENT_ID']."\n";
     }
 }
 // ################################################################################   

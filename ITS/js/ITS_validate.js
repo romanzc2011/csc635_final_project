@@ -23,8 +23,15 @@ $(document).ready(function(){
     $('#fetch_requests').on('click', function(event){
         $.get('../controller/ITS_processor.php?action=fetch_requests', function(response){
             $('#ip_req_table').find('tr:not(:first)').remove(); // Remove previous rows
-            $('#ip_req_table').append(response);
-        })
+            //$('#ip_req_table').append(response);
+            if(response != 0)
+            {
+                $('#ip_req_table').append(response);
+                $('#server_response').text("");
+            } else {
+                $('#server_response').text("No ip requests to process...");
+            }
+        });
     });
 });
 
