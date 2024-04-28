@@ -29,9 +29,6 @@
                     <th>STUDENT ID:</th>
                     <td><input id="INS_student_id" name="INS_student_id" class="resp-text" type="text"></td>
                 </tr>
-
-
-                
             </table>
         
             <!-- SUBMIT/RESET BUTTONS ----------------------------------------------------------->
@@ -42,39 +39,25 @@
             <!-- MANUAL FETCH REQUEST ------------------------------------------------------------>
             <button class="button lsus-orange btn-height btn-primary-spacing" id="fetch_requests" type="button">
                 <span style="font-size: 15px; font-weight: bold">FETCH REQUESTS</span>
-            </button>   
+            </button>  
+
             <button class="button lsus-orange btn-height btn-primary-spacing" id="reset_form" type="reset">
                 <span style="font-size: 15px; font-weight: bold">RESET</span>
             </button>
         </form>
+        <h5>RESPONSE FROM SERVER: <span id="server_response" name="server_response"></span> </h5>
 
         <!-- IP REQUESTS  ----------------------------------------------------------->
         <h3>IP REQUESTS</h3>
-        <table border="1">
+        <table border="1" id="ip_req_table">
             <!-- STUDENT ID -->
             <th>STUDENT ID:</th>
-            <td id="student_id"></td>
-
-            <!-- REQUIRED CLASSES ---------------------------------------------------->
             <th>CSC 242</th>
-            <td id="csc242"></td>
-            
-            <!-- CSC315 -->
             <th>CSC 315</th>
-            <td id="csc315"></td>
-
-            <!-- CSC382 -->
             <th>CSC 382</th>
-            <td id="csc382"></td>
-
-            <!-- CSC435/635 -->
             <th>CSC 435/635</th>
-            <td id="csc435635"></td>
-            
-            <!-- OTHER -->
             <th>OTHER</th>
-            <td id="csc_other"></td>
-            
+            <?php require_once('../controller/ITS_processor.php'); ?> 
         </table>
         <img src="../img/lsus-logo.png">
     </body>

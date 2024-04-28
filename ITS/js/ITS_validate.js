@@ -11,10 +11,20 @@ ITS_data_bools = {
 };
 
 $(document).ready(function(){
+
+    // Submit ip request form #########################################################
     $('#ip_request_form').on('submit', function(event){
         event.preventDefault();
         validateIPAddr(); // Validate the inputs
         submitIPData(); // Submit if valid inputs
+    });
+
+    // Get ip requests ################################################################
+    $('#fetch_requests').on('click', function(event){
+        $.get('../controller/ITS_processor.php?action=fetch_requests', function(response){
+            $('#ip_req_table').find('tr:not(:first)').remove(); // Remove previous rows
+            $('#ip_req_table').append(response);
+        })
     });
 });
 
@@ -27,7 +37,7 @@ function getEID(id)
 function validateIPAddr()
 {
     let IP_REGEX = /^10\.50\.4\.(?!0$|1$|254$|255$)(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)$/;
-    let COURSE_REGEX = /^[A-Za-z0-9]+$/;
+    let COURSE_REGEX = /^[A-Za-z0-9]{1,6}$/;
     let STUDENT_REGEX = /^[a-zA-Z]\d{8}$/;
 
     // Eliminate any whitespace first
@@ -39,14 +49,19 @@ function validateIPAddr()
     ITS_data_bools.crs_assign = COURSE_REGEX.test(course_to_assign);
     ITS_data_bools.stdnt_id = STUDENT_REGEX.test(student_id);
 
-    if(ITS_data_bools.ip_addr == false)
+    if(!ITS_data_bools.ip_addr)
     {
         alert("IP Address must be in the 10.50.4.0/24 network\nMust be 10.50.4.2-253");
     }
 
-    if(ITS_data_bools.stdnt_id == false)
+    if(!ITS_data_bools.stdnt_id)
     {
         alert("Invalid Student ID");
+    }
+
+    if(!ITS_data_bools.crs_assign)
+    {
+        alert("Invalid course name, [ Example: CSC635 ]\nOnly one course per request")
     }
 
 }
@@ -58,7 +73,8 @@ function submitIPData()
         let data = $('#ip_request_form').serialize();
 
         $.post('../controller/ITS_processor.php',data,function(response){
-          console.log(response);
+            console.log(response);
+            $('#server_response').text(response);
          });
     }
 }

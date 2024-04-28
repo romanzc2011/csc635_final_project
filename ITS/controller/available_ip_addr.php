@@ -3,9 +3,18 @@
  * START WITH FRESH DATA, BUT IP ADDRESSES IN AVAILABLE_IP_ADDR TABLE WILL BE USED
  * FOR PART OF THE PROJECT, THIS SCRIPT SERVES NO OTHER PURPOSE THEN TO POPULATE
  * AVAILABLE_IP_ADDR WITH IP ADDRESSES */
-require_once('../controller/raspberrypi_mysql_connection.php');
+require_once('../../controller/raspberrypi_mysql_connection.php');
 
 global $MYSQL_CONN;
+
+$sql = "ALTER TABLE AVAILABLE_IP_ADDR AUTO_INCREMENT = 2";
+
+try {
+    $MYSQL_CONN->exec($sql);
+    echo "Table successfully altered";
+} catch(PDOException $e) {
+    echo "Error altering table: ".$e->getMessage();
+}
 
 $subnet_24 = 2;
 
