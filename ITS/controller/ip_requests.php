@@ -21,6 +21,7 @@ $stmt_insert = $MYSQL_CONN->prepare($sql_insert);
 $sql_update = "UPDATE STUDENT SET REQUEST_SENT = ? WHERE STUDENT_ID = ?";
 $stmt_update = $MYSQL_CONN->prepare($sql_update);
 
+// ###########################################################################################
 foreach($query_results as $row)
 {
     if($row['REQUEST_SENT'] === 0)
@@ -49,7 +50,7 @@ foreach($query_results as $row)
             $course_flags['CSC242'],
             $course_flags['CSC315'],
             $course_flags['CSC382'],
-            $course_flags['CSC435635'];
+            $course_flags['CSC435635'],
             $course_flags['OTHER']
         ]);
 
