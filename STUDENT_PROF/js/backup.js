@@ -10,19 +10,21 @@ ITS_data_bools = {
     course_n : false
 };
 
-$(document).ready(function() {
+$(document).ready(function(){
 
     // Get ip requests ################################################################
-    $('#fetch_assignments').on('click', function(event) {
-        $.get('../controller/student_prof_processor.php?action=fetch_assignments', function(response) {
+    $('#fetch_assignments').on('click', function(event){
+        $.get('../controller/student_prof_processor.php?action=fetch_assignments', function(response){
             $('#ip_table').find('tr:not(:first)').remove(); // Remove previous rows
 
-            if (response != 0) {
+            if(response != 0)
+            {
                 $('#ip_table').append(response);
                 $('#server_response').text("");
             }
         });
     });
+
     // Fetch specific student ip info #################################################
     $('#fetch_student').on('click', function(event){
 
@@ -44,37 +46,18 @@ $(document).ready(function() {
 
         }  
     });
-    // Fetch specific student ip info #################################################
-    $('#fetch_student').on('click', function(event) {
 
-        good_id = validateStudentID();
-
-        if (good_id) {
-            $.get('../controller/student_prof_processor.php?action=fetch_student&student_id=' + $('#student_id').val(), function(response) {
-                $('#ip_table').find('tr:not(:first)').remove(); // Remove previous rows
-
-                if (response != 0) {
-                    $('#ip_table').append(response);
-                    $('#server_response').text("");
-                } else {
-                    $('#server_response').text("No ip assignments for")
-                }
-            });
-
-        }
-    });
-
-    $('#fetch_courses').on('click', function(event) {
+    $('#fetch_courses').on('click', function(event){
         let course_numbers = $('#course_num').val().trim();
-        good_course = validateCourseNum(course_numbers);
+        good_course =  validateCourseNum(course_numbers);
 
-        if (good_course) {
-            $.get('../controller/student_prof_processor.php?action=fetch_by_course&course_num=' + course_numbers, function(response) {
+        if(good_course)
+        {
+            $.get('../controller/student_prof_processor.php?action=fetch_by_course&course_num='+course_numbers, function(response){
                 $('#ip_table').find('tr:not(:first)').remove();
                 $('#ip_table').append(response);
             });
-        }
-    });
+
     // Reset page ##################################################
     $('#reset_table').on('click', function(event){
         $('#student_id').val("");

@@ -5,8 +5,31 @@ html {
     font-weight: bolder;
 }
 
+table {
+    border: 1px solid #150047;
+}
+
 th {
     text-align: left;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+td {
+    border: 1px solid #150047;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: #f0ad4e;
+    margin-top: 25px;
+}
+
+label {
+    padding-right: 5px;
 }
 
 .resp-text {
@@ -37,8 +60,6 @@ th {
 .lsus-orange {
     background-color: #f0ad4e;
 }
-
-
 
 .btn-primary-spacing {
     margin-right: 2px;

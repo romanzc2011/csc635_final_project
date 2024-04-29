@@ -30,6 +30,7 @@
                     <td><input id="INS_student_id" name="INS_student_id" class="resp-text" type="text"></td>
                 </tr>
             </table>
+            <hr>
         
             <!-- SUBMIT/RESET BUTTONS ----------------------------------------------------------->
             <button class="button lsus-orange btn-height btn-primary-spacing" id="submit_form" type="submit">
