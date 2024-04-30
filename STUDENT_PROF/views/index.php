@@ -10,17 +10,11 @@
         <script src="../js/STUDENT_PROF_validate.js" type="text/javascript"></script>
     </head>
     <body>
-       <label style="float:left;" for="course_num">COURSE:
-            <input style="" id="course_num" name="course_num" class="resp-text" type="text">
-       </label>
-       <br>
-       <br>
        <label style="float:left;" for="student_id">STUDENT ID:
             <input id="student_id" name="student_id" class="resp-text" type="text">
        </label>
        <br>
        <br>
-       (Search by either Student ID or Course)
        <hr style="margin-top: 5px;">
        <h2>STUDENT IP ASSIGNMENT MASTER LIST</h2>
             
@@ -34,11 +28,6 @@
                 <span style="font-size: 15px; font-weight: bold">FETCH STUDENT</span>
             </button>
             
-            <button class="button lsus-orange btn-height btn-primary-spacing" id="fetch_courses" type="button">
-                <span style="font-size: 15px; font-weight: bold">FETCH BY COURSE</span>
-            </button>
-
-
             <button class="button lsus-orange btn-height btn-primary-spacing" id="reset_table" type="button">
                 <span style="font-size: 15px; font-weight: bold">RESET</span>
             </button>

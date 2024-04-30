@@ -51,11 +51,12 @@ function checkCourseNum($course)
     $stmt = $MYSQL_CONN->prepare($sql);
     $stmt->execute();
     $course_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $test_course = [];
     $i = 0;
     // Get rid of all underscores
-    foreach($course_array as $k => $v)
+    foreach($course_array as $course)
     {
-        $course_array[$k]['COLUMN_NAME'] = str_ireplace('_', '', $course['COLUMN_NAME']);
+        $test_course[] = str_ireplace('_', '', $course['COLUMN_NAME']);
     }
 
     } catch(PDOException $e) {
