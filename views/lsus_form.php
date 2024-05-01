@@ -97,13 +97,15 @@
             </td>
         </tr>
     </table>
+    <br>
+        <div class="g-recaptcha" data-sitekey="6LftdswpAAAAAAq2s0R5dHdH4PnP-cXrd9_1QxQR" data-callback="onCaptchaSuccess"></div>
 
-    <!-- SUBMIT/RESET BUTTONS ----------------------------------------------------------->
-    <button class="button lsus-orange btn-height btn-primary-spacing" id="submit_form" type="submit">
-        <span style="font-size: 15px; font-weight: bold">SUBMIT</span>
-    </button>
+        <!-- SUBMIT/RESET BUTTONS ----------------------------------------------------------->
+        <button class="button lsus-orange btn-height btn-primary-spacing" id="submit_form" type="submit" disabled>
+            <span style="font-size: 15px; font-weight: bold">SUBMIT</span>
+        </button>
 
-    <button class="button lsus-orange btn-height btn-primary-spacing" id="reset_form" type="reset">
-        <span style="font-size: 15px; font-weight: bold">RESET</span>
-    </button>
+        <button class="button lsus-orange btn-height btn-primary-spacing" id="reset_form" type="reset">
+            <span style="font-size: 15px; font-weight: bold">RESET</span>
+        </button>
 </form>

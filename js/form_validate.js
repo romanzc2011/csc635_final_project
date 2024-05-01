@@ -17,6 +17,11 @@ form_booleans = {
     mac_addr : false
 };
 
+function onCaptchaSuccess() {
+    alert('Captcha completed!');
+    document.getElementById('submit_form').disabled = false; // Plain JavaScript method to enable the button
+}
+
 // Replacement function for getElementById
 function $(id)
 {
@@ -114,14 +119,17 @@ function Submit_Form()
         // ######################################################################
         // Create AJAX to send data to form_processor.php
         // ######################################################################
-        $('#submit_form').on('submit', function(event){
-            event.preventDefault();
-            let details = $('#student_form').serializeArray();
-            $.post('./controller/form_processor.php', details, function(data){
-                $('#form_data').html(data);
+            $('#submit_form').on('submit', function(event) {
+                event.preventDefault();
+                // Execute reCAPTCHA v3 on form submission
+                // Append the token to your form data
+                let details = $('#student_form').serializeArray();
+
+                // Now post the data
+                $.post('./controller/form_processor.php', details, function(data) {
+                    $('#form_data').html(data);
+                });
             });
-        });
-        
     } else {
 
         // Go thru all values in form_valid and determine the issue

@@ -1,4 +1,5 @@
 <?php require_once('./raspberrypi_mysql_connection.php'); ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,12 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CSC 635 FINAL PROJECT ROMAN CAMPBELL/BRAD BUSH</title>
         <style>
-            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/Lab7/css/stylesheet.css'); ?>
+            <?php require_once(__DIR__.'/../css/stylesheet.css'); ?>
         </style>
-    <head>
+    </head>
     <body>
         <div class="container">
-            <?php
+<?php
+
             global $MYSQL_CONN;
 
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -23,7 +25,6 @@
                 $rpi_type = isset($_POST['rpi_type']) ? strtoupper($_POST['rpi_type']) : "";
                 $academic_level = isset($_POST['academic_level']) ? strtoupper($_POST['academic_level']) : "";
                 $courses_used = isset($_POST['courses']) ? $_POST['courses'] : [];
-                
                 
                 // Insert data into STUDENT TABLE
                 $sql = "INSERT INTO STUDENT (STUDENT_ID,FIRST_NAME,LAST_NAME,STUDENT_EMAIL,RPI_WIFI_MAC_ADDR,RPI_TYPE,                          COURSE_RPI_USED,ACADEMIC_LEVEL)
